@@ -1,3 +1,4 @@
+//Dev Kapadia
 public class Homework16 {
 
 	/* This problem should calculate and return the value
@@ -6,7 +7,14 @@ public class Homework16 {
 	 * multiplication is repeated addition
 	 */
 	public static int problem1(int a, int b) {
-
+		int c;
+		if (b == 1) {
+			return a;
+		}
+		else {
+			c = problem1(a, b - 1) + a;
+		}
+		return c;
 	}
 
 	/* This problem should calculate and return the value
@@ -16,7 +24,14 @@ public class Homework16 {
 	 * exponentiation is repeated multiplication
 	 */
 	public static int problem2(int a, int b) {
-
+		int d;
+		if (b == 1) {
+			return a;
+		}
+		else {
+			d = problem1(problem2(a, b - 1), a);
+		}
+		return d;
 	}
 
 	/* Recursively find the minimum value in the given
@@ -27,11 +42,26 @@ public class Homework16 {
 	 * half of the array
 	 */
 	public static int problem3(int[] arr) {
-
+		return problem3(arr, 0, arr.length);
 	}
 
 	private static int problem3(int[] arr, int start, int end) {
-
+		int min;
+		int length = end - start;
+		int midpoint = start + length / 2;
+		if (length <= 1) {
+			min = arr[start];
+			return min;
+		}
+		else {
+			if (problem3(arr, start, midpoint) > problem3(arr, midpoint, end)) {
+				min = problem3(arr, midpoint, end);
+			}
+			else {
+				min = problem3(arr, start, midpoint);
+			}
+			return min;
+		}
 	}
 
 	/* Recursively find the sum of the digits of
@@ -40,7 +70,14 @@ public class Homework16 {
 	 * and the remaining numbers are num / 10
 	 */
 	public static int problem4(int num) {
-
+		int add;
+		if (num < 10) {
+			return num;
+		}
+		else {
+			add = problem4(num / 10) + (num % 10);
+			return add;
+		}
 	}
 
 	/* We have bunnies standing in a line,
@@ -56,7 +93,15 @@ public class Homework16 {
 	 * problem5(2) → 5
 	 */
 	 public static int problem5(int bunnies) {
-
+		 if (bunnies == 0) {
+			 return 0;
+		 }
+		 else if ((bunnies % 2 == 0) && (bunnies != 0)) {
+			 return 3 + problem5(bunnies - 1);
+		 }
+		 else {
+			 return 2 + problem5(bunnies - 1);
+		 }
 	 }
 
 	 public static void main(String[] args) {
@@ -64,17 +109,20 @@ public class Homework16 {
 
 		 if (problem1(6, 4) != 24) {
 			 System.out.println("Fail 1");
+			 System.out.println(problem1(6,4));
 			 passed = false;
 		 }
 
 		 if (problem2(5, 3) != 125) {
 			 System.out.println("Fail 2");
+			 System.out.println(problem2(5,3));
 			 passed = false;
 		 }
 
 		 int[] arr = {4, 5, 2, 6, 3, 6, 7, 8};
 		 if (problem3(arr) != 2) {
 			 System.out.println("Fail 3");
+			 System.out.println(problem3(arr));
 			 passed = false;
 		 }
 
